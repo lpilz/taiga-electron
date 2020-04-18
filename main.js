@@ -32,7 +32,7 @@ function createWindow () {
   win = new BrowserWindow(opts)
 
   // Open the DevTools.
-  win.webContents.openDevTools()
+  //win.webContents.openDevTools()
   win.setMenu(null)
 
   // and load the index.html of the app.
