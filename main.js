@@ -1,4 +1,6 @@
 const {app, protocol, BrowserWindow} = require('electron')
+const Config = require('electron-config')
+const config = new Config()
 const path = require('path')
 const fs = require('fs')
 const url = require('url')
@@ -24,6 +26,7 @@ function interceptUrls(request, callback) {
 function createWindow () {
   protocol.interceptFileProtocol("file", interceptUrls)
   let opts = {width: 800, height: 600, 'webPreferences': {'nodeIntegration': false}, icon: __dirname + '/taiga.ico'}
+  Object.assign(opts, config.get('winBounds'))
 
   // Create the browser window.
   win = new BrowserWindow(opts)
@@ -41,6 +44,9 @@ function createWindow () {
   win.loadURL(root_url)
   // win.loadURL("https://tree.taiga.io")
 
+  win.on('close', () => {
+    config.set('winBounds', win.getBounds())
+  })
   // Emitted when the window is closed.
   win.on('closed', () => {
     // Dereference the window object, usually you would store windows

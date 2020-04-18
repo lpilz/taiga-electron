@@ -12,6 +12,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron ."
   },
+  "dependencies": {
+    "electron-config": "2.0.0"
+  },
   "author": "Kaleidos OpenSource SL",
   "licenses": [
     {
